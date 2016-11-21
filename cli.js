@@ -12,6 +12,7 @@ const cli = meow(`
 	  --parents            Preserve path structure
 	  --cwd=<dir>          Working directory for files
 	  --rename=<filename>  Rename all <source> filenames to <filename>
+          --no-dir             Do not match directories
 
 	<source> can contain globs if quoted
 
@@ -30,6 +31,7 @@ fn(cli.input, cli.input.pop(), {
 	rename: cli.flags.rename,
 	parents: cli.flags.parents,
 	overwrite: cli.flags.overwrite !== false,
+        nodir: cli.flags.noDir !== false,
 	nonull: true
 }).catch(err => {
 	if (err.name === 'CpyError') {
